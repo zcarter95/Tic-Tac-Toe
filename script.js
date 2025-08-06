@@ -2,11 +2,12 @@ const gameboard = (function() {
     const rows = 3;
     const columns = 3;
     const board = [];
-
-    for (let x = 0; x < rows; x++) {
-        board[x] = [];
-        for (let y = 0; y < columns; y++) {
-            board[x].push(" - ");
+    const init = () => {
+        for (let row = 0; row < rows; row++) {
+            board[row] = [];
+            for (let column = 0; column < columns; column++) {
+                board[row].push(" - ");
+            }
         }
     }
     const getGameBoard = () => {
@@ -28,7 +29,7 @@ const gameboard = (function() {
         printBoard();
     }
 
-    return {getGameBoard, play}
+    return {getGameBoard, play, init}
 })();
 
 const createPlayer = (name, symbol) => {
@@ -39,6 +40,8 @@ const gameManager = (() => {
     let player1 = null;
     let player2 = null;
     const start = (name1, name2) => {
+        gameboard.init();
+        playCounter = 0;
         player1 = createPlayer(name1, "X");
         player2 = createPlayer(name2, "O");
         console.log(`Player1: ${player1.name} is playing ${player1.symbol}`)
@@ -54,6 +57,106 @@ const gameManager = (() => {
         else {
             let play = gameboard.play(player2, x, y);
             if (play == "error") {playCounter--}
+        }
+        checkWin()
+    }
+    const checkWin = () => {
+        const board = gameboard.getGameBoard()
+        //row 1
+        if (board[0][0] === board[0][1] && board[0][1] === board[0][2]) {
+            switch(board[0][0]) {
+                case(" - "):
+                    break;
+                case(" X "):
+                    console.log(`${player1.name} wins!`);
+                    break;
+                case(" O "):
+                    console.log(`${player2.name} wins!`)
+            }
+        }
+        //row 2
+        else if (board[1][0] === board[1][1] && board[1][1] === board[1][2]) {
+            switch(board[1][0]) {
+                case(" - "):
+                    break;
+                case(" X "):
+                    console.log(`${player1.name} wins!`);
+                    break;
+                case(" O "):
+                    console.log(`${player2.name} wins!`)
+            }
+        }
+        //row 3
+        else if (board[2][0] === board[2][1] && board[2][1] === board[2][2]) {
+            switch(board[2][0]) {
+                case(" - "):
+                    break;
+                case(" X "):
+                    console.log(`${player1.name} wins!`);
+                    break;
+                case(" O "):
+                    console.log(`${player2.name} wins!`)
+            }
+        }
+        //column 1
+        else if (board[0][0] === board[1][0] && board[1][0] === board[2][0]) {
+            switch(board[0][0]) {
+                case(" - "):
+                    break;
+                case(" X "):
+                    console.log(`${player1.name} wins!`);
+                    break;
+                case(" O "):
+                    console.log(`${player2.name} wins!`)
+            }
+        }
+        //column 2
+        else if (board[0][1] === board[1][1] && board[1][1] === board[2][1]) {
+            switch(board[0][1]) {
+                case(" - "):
+                    break;
+                case(" X "):
+                    console.log(`${player1.name} wins!`);
+                    break;
+                case(" O "):
+                    console.log(`${player2.name} wins!`)
+            }
+        }
+        //column 3
+        else if (board[0][2] === board[1][2] && board[1][2] === board[2][2]) {
+            switch(board[0][2]) {
+                case(" - "):
+                    break;
+                case(" X "):
+                    console.log(`${player1.name} wins!`);
+                    break;
+                case(" O "):
+                    console.log(`${player2.name} wins!`)
+            }
+        }
+        //diaganol 1
+        else if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+            switch(board[0][0]) {
+                case(" - "):
+                    break;
+                case(" X "):
+                    console.log(`${player1.name} wins!`);
+                    break;
+                case(" O "):
+                    console.log(`${player2.name} wins!`)
+            }
+        }
+        //diaganol 2
+        else if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+            switch(board[0][2]) {
+                case(" - "):
+                    break;
+                case(" X "):
+                    console.log(`${player1.name} wins!`);
+                    break;
+                case(" O "):
+                    console.log(`${player2.name} wins!`)
+            }
         }
     }
     return { start, play }
