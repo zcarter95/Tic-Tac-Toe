@@ -31,15 +31,14 @@ function getPlayerNames() {
 function addEventListenersCells() {
     let cells = document.getElementsByClassName("cell");
     console.log(gameManager.getGameStatus)
-    if (gameManager.getGameStatus) {
-        for (let i = 0; i < cells.length; i++) {
-            cells[i].addEventListener("click", processTurn)
-        }
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].addEventListener("click", processTurn)
     }
-    else {
-        for (let i = 0; i < cells.length; i++) {
-            cells[i].removeEventListener("click", processTurn)
-        }
+}
+function removeEventListenersCells() {
+    let cells = document.getElementsByClassName("cell");
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].removeEventListener("click", processTurn);
     }
 }
 function processTurn() {
@@ -53,6 +52,7 @@ function updateUI() {
     for (let row = 0; row < board.length; row++) {
         for (let column = 0; column < board[row].length; column++) {
             cell[cellNumber].textContent = board[row][column];
+            cell[cellNumber].style.backgroundColor = "gray";
             cellNumber++
         }
     }
@@ -98,6 +98,7 @@ const gameManager = (() => {
     const start = (name1, name2) => {
         gameboard.init();
         updateUI();
+        addEventListenersCells();
         playCounter = 0;
         player1 = createPlayer(name1, " X ");
         player2 = createPlayer(name2, " O ");
@@ -123,7 +124,7 @@ const gameManager = (() => {
     const checkWin = () => {
         const board = gameboard.getGameBoard()
         //row 1
-        if (board[0][0] === board[0][1] && board[0][1] === board[0][2]) {
+        if ((board[0][0] === board[0][1] && board[0][1] === board[0][2]) && board[0][0] !== " - ") {
             switch(board[0][0]) {
                 case(" - "):
                     break;
@@ -131,93 +132,140 @@ const gameManager = (() => {
                     console.log(`${player1.name} wins!`);
                     gamestarted = false;
                     highlightWinningCells(["0,0","0,1","0,2"]);
+                    removeEventListenersCells();
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
+                    gamestarted = false;
+                    highlightWinningCells(["0,0","0,1","0,2"]);
+                    removeEventListenersCells();
             }
         }
         //row 2
-        else if (board[1][0] === board[1][1] && board[1][1] === board[1][2]) {
+        else if ((board[1][0] === board[1][1] && board[1][1] === board[1][2]) && board[1][0] !== " - ") {
             switch(board[1][0]) {
                 case(" - "):
                     break;
                 case(" X "):
                     console.log(`${player1.name} wins!`);
+                    gamestarted = false;
+                    highlightWinningCells(["1,0","1,1","1,2"]);
+                    removeEventListenersCells();
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
+                    gamestarted = false;
+                    highlightWinningCells(["1,0","1,1","1,2"]);
+                    removeEventListenersCells();
             }
         }
         //row 3
-        else if (board[2][0] === board[2][1] && board[2][1] === board[2][2]) {
+        else if (board[2][0] === board[2][1] && board[2][1] === board[2][2] && board[2][0] !== " - ") {
+            console.log("row3");
             switch(board[2][0]) {
                 case(" - "):
                     break;
                 case(" X "):
                     console.log(`${player1.name} wins!`);
+                    gamestarted = false;
+                    highlightWinningCells(["2,0","2,1","2,2"]);
+                    removeEventListenersCells();
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
+                    gamestarted = false;
+                    highlightWinningCells(["2,0","2,1","2,2"]);
+                    removeEventListenersCells();
             }
         }
         //column 1
-        else if (board[0][0] === board[1][0] && board[1][0] === board[2][0]) {
+        else if (board[0][0] === board[1][0] && board[1][0] === board[2][0] && board[0][0] !== " - ") {
             switch(board[0][0]) {
                 case(" - "):
                     break;
                 case(" X "):
                     console.log(`${player1.name} wins!`);
+                    gamestarted = false;
+                    highlightWinningCells(["0,0","1,0","2,0"]);
+                    removeEventListenersCells();
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
+                    gamestarted = false;
+                    highlightWinningCells(["0,0","1,0","2,0"]);
+                    removeEventListenersCells();
             }
         }
         //column 2
-        else if (board[0][1] === board[1][1] && board[1][1] === board[2][1]) {
+        else if (board[0][1] === board[1][1] && board[1][1] === board[2][1] && board[0][1] !== " - ") {
             switch(board[0][1]) {
                 case(" - "):
                     break;
                 case(" X "):
                     console.log(`${player1.name} wins!`);
+                    gamestarted = false;
+                    highlightWinningCells(["0,1","1,1","2,1"]);
+                    removeEventListenersCells();
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
+                    gamestarted = false;
+                    highlightWinningCells(["0,1","1,1","2,1"]);
+                    removeEventListenersCells();
             }
         }
         //column 3
-        else if (board[0][2] === board[1][2] && board[1][2] === board[2][2]) {
+        else if (board[0][2] === board[1][2] && board[1][2] === board[2][2] && board[0][2] !== " - ") {
             switch(board[0][2]) {
                 case(" - "):
                     break;
                 case(" X "):
                     console.log(`${player1.name} wins!`);
+                    gamestarted = false;
+                    highlightWinningCells(["0,2","1,2","2,2"]);
+                    removeEventListenersCells();
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
+                    gamestarted = false;
+                    highlightWinningCells(["0,2","1,2","2,2"]);
+                    removeEventListenersCells();
             }
         }
         //diaganol 1
-        else if (board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+        else if (board[0][0] === board[1][1] && board[1][1] === board[2][2] && board[0][0] !== " - ") {
             switch(board[0][0]) {
                 case(" - "):
                     break;
                 case(" X "):
                     console.log(`${player1.name} wins!`);
+                    gamestarted = false;
+                    highlightWinningCells(["0,0", "1,1", "2,2"]);
+                    removeEventListenersCells();
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
+                    gamestarted = false;
+                    highlightWinningCells(["0,0", "1,1", "2,2"]);
+                    removeEventListenersCells();
             }
         }
         //diaganol 2
-        else if (board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+        else if (board[0][2] === board[1][1] && board[1][1] === board[2][0] && board[0][2] !== " - ") {
             switch(board[0][2]) {
                 case(" - "):
                     break;
                 case(" X "):
                     console.log(`${player1.name} wins!`);
+                    gamestarted = false;
+                    highlightWinningCells(["0,2", "1,1", "2,0"]);
+                    removeEventListenersCells();
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
+                    gamestarted = false;
+                    highlightWinningCells(["0,2", "1,1", "2,0"]);
+                    removeEventListenersCells();
             }
         }
     }
