@@ -1,4 +1,27 @@
-let cell = document.getElementsByClassName("cell")
+if (document.readyState == "loading") {
+    document.addEventListener("DOMContentLoaded", ready);
+}else {
+    ready();
+}
+
+function ready() {
+    updateUI();
+}
+
+function updateUI() {
+    let cell = document.getElementsByClassName("cell");
+    let board = gameboard.getGameBoard();
+    console.log(board)
+    cellNumber = 0
+    for (let row = 0; row < board.length; row++) {
+        for (let column = 0; column < board[row].length; column++) {
+            console.log("cell should update")
+            cell[cellNumber].textContent = board[row][column];
+            cellNumber++
+        }
+    }
+}
+
 const gameboard = (function() {
     const rows = 3;
     const columns = 3;
@@ -11,33 +34,18 @@ const gameboard = (function() {
                 board[row].push(" - ");
             }
         }
-        printBoard();
     }
     const getGameBoard = () => {
         return board;
     }
-    const printBoard = () => {
-        let cell = document.getElementsByClassName("cell")
-        let cellNumber = 0;
-        for (let row = 0; row < board.length; row++) {
-            for (let column = 0; column < board[row]; column++) {
-                cell[cellNumber].textContent = "X";
-                cellNumber++;
-            }
-        }
-        console.log(board[0]);
-        console.log(board[1]);
-        console.log(board[2]);
-    }
     const play = (player, row,column) => {
         if (board[row][column] === " - "){
-            board[row][column] = ` ${player.symbol} `
+            board[row][column] = `${player.symbol}`
         }
         else {
             console.log(`(${row},${column}) is occupied!`)
             return "error"
         }
-        printBoard();
     }
 
     return {getGameBoard, play, init}
@@ -52,6 +60,7 @@ const gameManager = (() => {
     let player2 = null;
     const start = (name1, name2) => {
         gameboard.init();
+        updateUI();
         playCounter = 0;
         player1 = createPlayer(name1, "X");
         player2 = createPlayer(name2, "O");
@@ -69,6 +78,7 @@ const gameManager = (() => {
             let play = gameboard.play(player2, x, y);
             if (play == "error") {playCounter--}
         }
+        updateUI();
         checkWin()
     }
     const checkWin = () => {
