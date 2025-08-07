@@ -1,7 +1,9 @@
+let cell = document.getElementsByClassName("cell")
 const gameboard = (function() {
     const rows = 3;
     const columns = 3;
     const board = [];
+    
     const init = () => {
         for (let row = 0; row < rows; row++) {
             board[row] = [];
@@ -9,11 +11,20 @@ const gameboard = (function() {
                 board[row].push(" - ");
             }
         }
+        printBoard();
     }
     const getGameBoard = () => {
         return board;
     }
     const printBoard = () => {
+        let cell = document.getElementsByClassName("cell")
+        let cellNumber = 0;
+        for (let row = 0; row < board.length; row++) {
+            for (let column = 0; column < board[row]; column++) {
+                cell[cellNumber].textContent = "X";
+                cellNumber++;
+            }
+        }
         console.log(board[0]);
         console.log(board[1]);
         console.log(board[2]);
