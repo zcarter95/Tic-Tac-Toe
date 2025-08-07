@@ -6,16 +6,52 @@ if (document.readyState == "loading") {
 
 function ready() {
     updateUI();
+    getPlayerNames();
+    addEventListenersCells();
 }
 
+function highlightWinningCells(winningCells) {
+    console.log(toString(winningCells[0]))
+    let cell1 = document.getElementById(winningCells[0]);
+    let cell2 = document.getElementById(winningCells[1]);
+    let cell3 = document.getElementById(winningCells[2]);
+    cell1.style.backgroundColor = "lightgray";
+    cell2.style.backgroundColor = "lightgray";
+    cell3.style.backgroundColor = "lightgray";
+}
+function getPlayerNames() {
+    let submit = document.getElementsByClassName("start_game")[0];
+    submit.addEventListener('submit', function(event) {
+        event.preventDefault();
+        let formData = new FormData(submit);
+        gameManager.start(Object.fromEntries(formData).player1, Object.fromEntries(formData).player2)
+    });
+}
+
+function addEventListenersCells() {
+    let cells = document.getElementsByClassName("cell");
+    console.log(gameManager.getGameStatus)
+    if (gameManager.getGameStatus) {
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].addEventListener("click", processTurn)
+        }
+    }
+    else {
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].removeEventListener("click", processTurn)
+        }
+    }
+}
+function processTurn() {
+    let cellCoord = (event.target.id).split(",");
+    gameManager.play(cellCoord[0],cellCoord[1]);
+}
 function updateUI() {
     let cell = document.getElementsByClassName("cell");
     let board = gameboard.getGameBoard();
-    console.log(board)
     cellNumber = 0
     for (let row = 0; row < board.length; row++) {
         for (let column = 0; column < board[row].length; column++) {
-            console.log("cell should update")
             cell[cellNumber].textContent = board[row][column];
             cellNumber++
         }
@@ -58,14 +94,17 @@ const createPlayer = (name, symbol) => {
 const gameManager = (() => {
     let player1 = null;
     let player2 = null;
+    let gamestarted = false;
     const start = (name1, name2) => {
         gameboard.init();
         updateUI();
         playCounter = 0;
-        player1 = createPlayer(name1, "X");
-        player2 = createPlayer(name2, "O");
-        console.log(`Player1: ${player1.name} is playing ${player1.symbol}`)
-        console.log(`Player2: ${player2.name} is playing ${player2.symbol}`)
+        player1 = createPlayer(name1, " X ");
+        player2 = createPlayer(name2, " O ");
+        gamestarted = true;
+    }
+    const getGameStatus = () => {
+        return gamestarted;
     }
     let playCounter = 0;
     const play = (x, y) => {
@@ -90,6 +129,8 @@ const gameManager = (() => {
                     break;
                 case(" X "):
                     console.log(`${player1.name} wins!`);
+                    gamestarted = false;
+                    highlightWinningCells(["0,0","0,1","0,2"]);
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
@@ -180,5 +221,5 @@ const gameManager = (() => {
             }
         }
     }
-    return { start, play }
+    return { start, play, getGameStatus }
 })();

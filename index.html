@@ -9,16 +9,31 @@
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <h1>Tic Tac Toe</h1>
+            <h2>Enter player names</h2>
+            <form action="put" class="start_game">
+                <div class="player x">
+                    <label for="player1">Player X: </label>
+                    <input type="text" id="player1" name="player1">
+                </div>
+                <div class="player o">
+                    <label for="player2">Player O: </label>
+                    <input type="text" id="player2" name="player2">
+                </div>
+                <button type="submit" class="play">Play</button>
+            </form>
+        </div>
         <div class="grid">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
+            <div class="cell" id="0,0"></div>
+            <div class="cell" id="0,1"></div>
+            <div class="cell" id="0,2"></div>
+            <div class="cell" id="1,0"></div>
+            <div class="cell" id="1,1"></div>
+            <div class="cell" id="1,2"></div>
+            <div class="cell" id="2,0"></div>
+            <div class="cell" id="2,1"></div>
+            <div class="cell" id="2,2"></div>
         </div>
     </div>
 </body>
