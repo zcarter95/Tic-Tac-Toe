@@ -18,7 +18,7 @@ h2 {
     text-align: center;
 }
 .header {
-    margin-bottom: 5rem;
+    margin-bottom: 1.5rem;
     display: grid;
     justify-content: center;
     gap: 1rem;
@@ -76,4 +76,38 @@ input {
 .cell:hover {
     background-color: white;
     transform: scale(1.05);
+}
+
+.players {
+    display: grid;
+    grid-auto-flow: column;
+    margin: 1rem;
+    gap: 1rem;
+}
+
+.player1, .player2 {
+    display: grid;
+    justify-content: center;
+    border-radius: .5rem;
+}
+
+.players h2, span {
+    text-align: center;
+}
+
+.players h2 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.players span {
+    font-weight: 800;
+    font-size: 3rem;
+}
+
+.player1 {
+    background-color: teal;
+}
+.player2 {
+    background-color: orange;
 }

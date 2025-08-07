@@ -45,8 +45,15 @@ function processTurn() {
     let cellCoord = (event.target.id).split(",");
     gameManager.play(cellCoord[0],cellCoord[1]);
 }
-function updateUI() {
+function updateUI(name1, name2) {
     let cell = document.getElementsByClassName("cell");
+    let player1 = document.getElementsByClassName("player1")[0];
+    let player2 = document.getElementsByClassName("player2")[0];
+    // console.log(player1.children)
+    player1.children[0].textContent = name1;
+    player2.children[0].textContent = name2;
+    player1.children[1].textContent = gameManager.getPlayer1Score();
+    player2.children[1].textContent = gameManager.getPlayer2Score();
     let board = gameboard.getGameBoard();
     cellNumber = 0
     for (let row = 0; row < board.length; row++) {
@@ -95,9 +102,11 @@ const gameManager = (() => {
     let player1 = null;
     let player2 = null;
     let gamestarted = false;
+    let player1Score = 0;
+    let player2Score = 0;
     const start = (name1, name2) => {
         gameboard.init();
-        updateUI();
+        updateUI(name1, name2);
         addEventListenersCells();
         playCounter = 0;
         player1 = createPlayer(name1, " X ");
@@ -106,6 +115,12 @@ const gameManager = (() => {
     }
     const getGameStatus = () => {
         return gamestarted;
+    }
+    const getPlayer1Score = () => {
+        return player1Score;
+    }
+    const getPlayer2Score = () => {
+        return player2Score;
     }
     let playCounter = 0;
     const play = (x, y) => {
@@ -119,7 +134,7 @@ const gameManager = (() => {
             if (play == "error") {playCounter--}
         }
         updateUI();
-        checkWin()
+        checkWin();
     }
     const checkWin = () => {
         const board = gameboard.getGameBoard()
@@ -133,12 +148,15 @@ const gameManager = (() => {
                     gamestarted = false;
                     highlightWinningCells(["0,0","0,1","0,2"]);
                     removeEventListenersCells();
+                    player1Score++;
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
                     highlightWinningCells(["0,0","0,1","0,2"]);
                     removeEventListenersCells();
+                    player2Score++;
+                    break;
             }
         }
         //row 2
@@ -151,12 +169,15 @@ const gameManager = (() => {
                     gamestarted = false;
                     highlightWinningCells(["1,0","1,1","1,2"]);
                     removeEventListenersCells();
+                    player1Score++;
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
                     highlightWinningCells(["1,0","1,1","1,2"]);
                     removeEventListenersCells();
+                    player2Score++;
+                    break;
             }
         }
         //row 3
@@ -170,12 +191,15 @@ const gameManager = (() => {
                     gamestarted = false;
                     highlightWinningCells(["2,0","2,1","2,2"]);
                     removeEventListenersCells();
+                    player1Score++;
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
                     highlightWinningCells(["2,0","2,1","2,2"]);
                     removeEventListenersCells();
+                    player2Score++;
+                    break;
             }
         }
         //column 1
@@ -188,12 +212,15 @@ const gameManager = (() => {
                     gamestarted = false;
                     highlightWinningCells(["0,0","1,0","2,0"]);
                     removeEventListenersCells();
+                    player1Score++;
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
                     highlightWinningCells(["0,0","1,0","2,0"]);
                     removeEventListenersCells();
+                    player2Score++;
+                    break;
             }
         }
         //column 2
@@ -206,12 +233,15 @@ const gameManager = (() => {
                     gamestarted = false;
                     highlightWinningCells(["0,1","1,1","2,1"]);
                     removeEventListenersCells();
+                    player1Score++;
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
                     highlightWinningCells(["0,1","1,1","2,1"]);
                     removeEventListenersCells();
+                    player2Score++;
+                    break;
             }
         }
         //column 3
@@ -224,12 +254,15 @@ const gameManager = (() => {
                     gamestarted = false;
                     highlightWinningCells(["0,2","1,2","2,2"]);
                     removeEventListenersCells();
+                    player1Score++;
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
                     highlightWinningCells(["0,2","1,2","2,2"]);
                     removeEventListenersCells();
+                    player2Score++;
+                    break;
             }
         }
         //diaganol 1
@@ -242,12 +275,15 @@ const gameManager = (() => {
                     gamestarted = false;
                     highlightWinningCells(["0,0", "1,1", "2,2"]);
                     removeEventListenersCells();
+                    player1Score++;
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
                     highlightWinningCells(["0,0", "1,1", "2,2"]);
                     removeEventListenersCells();
+                    player2Score++;
+                    break;
             }
         }
         //diaganol 2
@@ -260,14 +296,17 @@ const gameManager = (() => {
                     gamestarted = false;
                     highlightWinningCells(["0,2", "1,1", "2,0"]);
                     removeEventListenersCells();
+                    player1Score++;
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
                     highlightWinningCells(["0,2", "1,1", "2,0"]);
                     removeEventListenersCells();
+                    player2Score++;
+                    break;
             }
         }
     }
-    return { start, play, getGameStatus }
+    return { start, play, getGameStatus, getPlayer1Score, getPlayer2Score }
 })();
