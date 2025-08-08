@@ -31,9 +31,10 @@ h2 {
 
 form button {
     width: auto;
-    height: 2rem;
+    height: 3rem;
     border-radius: .5rem;
     border: solid black 3px;
+    font-size: 2rem;
 }
 .player {
     display: grid;
@@ -63,6 +64,7 @@ input {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     border-color: black;
+    justify-self: center;
 }
 .cell {
     border-radius: 5%;

@@ -133,7 +133,7 @@ const gameManager = (() => {
             let play = gameboard.play(player2, x, y);
             if (play == "error") {playCounter--}
         }
-        updateUI();
+        updateUI(player1.name, player2.name);
         checkWin();
     }
     const checkWin = () => {
@@ -146,16 +146,18 @@ const gameManager = (() => {
                 case(" X "):
                     console.log(`${player1.name} wins!`);
                     gamestarted = false;
-                    highlightWinningCells(["0,0","0,1","0,2"]);
                     removeEventListenersCells();
                     player1Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,0","0,1","0,2"]);
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
-                    highlightWinningCells(["0,0","0,1","0,2"]);
                     removeEventListenersCells();
                     player2Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,0","0,1","0,2"]);
                     break;
             }
         }
@@ -167,16 +169,18 @@ const gameManager = (() => {
                 case(" X "):
                     console.log(`${player1.name} wins!`);
                     gamestarted = false;
-                    highlightWinningCells(["1,0","1,1","1,2"]);
                     removeEventListenersCells();
                     player1Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["1,0","1,1","1,2"]);
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
-                    highlightWinningCells(["1,0","1,1","1,2"]);
                     removeEventListenersCells();
                     player2Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["1,0","1,1","1,2"]);
                     break;
             }
         }
@@ -189,16 +193,18 @@ const gameManager = (() => {
                 case(" X "):
                     console.log(`${player1.name} wins!`);
                     gamestarted = false;
-                    highlightWinningCells(["2,0","2,1","2,2"]);
                     removeEventListenersCells();
                     player1Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["2,0","2,1","2,2"]);
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
-                    highlightWinningCells(["2,0","2,1","2,2"]);
                     removeEventListenersCells();
                     player2Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["2,0","2,1","2,2"]);
                     break;
             }
         }
@@ -210,16 +216,18 @@ const gameManager = (() => {
                 case(" X "):
                     console.log(`${player1.name} wins!`);
                     gamestarted = false;
-                    highlightWinningCells(["0,0","1,0","2,0"]);
                     removeEventListenersCells();
                     player1Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,0","1,0","2,0"]);
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
-                    highlightWinningCells(["0,0","1,0","2,0"]);
                     removeEventListenersCells();
                     player2Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,0","1,0","2,0"]);
                     break;
             }
         }
@@ -231,16 +239,18 @@ const gameManager = (() => {
                 case(" X "):
                     console.log(`${player1.name} wins!`);
                     gamestarted = false;
-                    highlightWinningCells(["0,1","1,1","2,1"]);
                     removeEventListenersCells();
                     player1Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,1","1,1","2,1"]);
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
-                    highlightWinningCells(["0,1","1,1","2,1"]);
                     removeEventListenersCells();
                     player2Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,1","1,1","2,1"]);
                     break;
             }
         }
@@ -252,16 +262,18 @@ const gameManager = (() => {
                 case(" X "):
                     console.log(`${player1.name} wins!`);
                     gamestarted = false;
-                    highlightWinningCells(["0,2","1,2","2,2"]);
                     removeEventListenersCells();
                     player1Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,2","1,2","2,2"]);
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
-                    highlightWinningCells(["0,2","1,2","2,2"]);
                     removeEventListenersCells();
                     player2Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,2","1,2","2,2"]);
                     break;
             }
         }
@@ -273,16 +285,18 @@ const gameManager = (() => {
                 case(" X "):
                     console.log(`${player1.name} wins!`);
                     gamestarted = false;
-                    highlightWinningCells(["0,0", "1,1", "2,2"]);
                     removeEventListenersCells();
                     player1Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,0", "1,1", "2,2"]);
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
-                    highlightWinningCells(["0,0", "1,1", "2,2"]);
                     removeEventListenersCells();
                     player2Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,0", "1,1", "2,2"]);
                     break;
             }
         }
@@ -294,16 +308,18 @@ const gameManager = (() => {
                 case(" X "):
                     console.log(`${player1.name} wins!`);
                     gamestarted = false;
-                    highlightWinningCells(["0,2", "1,1", "2,0"]);
                     removeEventListenersCells();
                     player1Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,2", "1,1", "2,0"]);
                     break;
                 case(" O "):
                     console.log(`${player2.name} wins!`)
                     gamestarted = false;
-                    highlightWinningCells(["0,2", "1,1", "2,0"]);
                     removeEventListenersCells();
                     player2Score++;
+                    updateUI(player1.name, player2.name);
+                    highlightWinningCells(["0,2", "1,1", "2,0"]);
                     break;
             }
         }
